@@ -1,0 +1,157 @@
+.pokemon_container {
+    text-align: center;
+    transition: 0.4s;
+
+}
+
+.title {
+    font-size: 2em;
+    text-transform: capitalize;
+    background-color: #333;
+    color: white;
+    padding: .3em;
+    margin: .8em auto;
+    width: 300px;
+    border-radius: .8em;
+    border: 2px solid #E33D33;
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, .5);
+    
+}
+
+.pokemon_container h3 {
+    margin: .6em auto;
+    font-size: 1.2em;
+
+}
+
+.types_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+
+}
+
+.type {
+    padding: .6em 1em;
+    color: white;
+    background-color: #000;
+    margin-right: .5em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-size: .8em;
+    font-weight: bold;
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, .5);
+}
+
+.type_normal {
+    background-color: #aa9;
+    color: rgb(93, 93, 82);;
+  }
+  
+  .type_fire {
+    background-color: #f42;
+    color: rgb(81, 24, 14);;
+  }
+  
+  .type_water {
+    background-color: #39f;
+    color: rgb(19, 55, 92);
+  }
+  
+  .type_eletric {
+    background-color: #fc3;
+    color: rgb(107, 85, 20) ;
+  }
+  
+  .type_grass {
+    background-color: #7c5;
+    color: rgb(47, 79, 34);
+  }
+  
+  .type_ice {
+    background-color: #6cf;
+    color: rgb(35, 68, 85);
+  }
+  
+  .type_fighting {
+    background-color: #b54;
+    color: rgb(62, 29, 23);
+  }
+  
+  .type_poison {
+    background-color: #a59;
+    color: rgb(72, 36, 65);
+  }
+  
+  .type_ground {
+    background-color: #db5;
+    color: rgb(77, 66, 31);
+  }
+  
+  .type_flying {
+    background-color: #89f;
+    color: rgb(46, 51, 81);
+  }
+  
+  .type_psychic {
+    background-color: #f59;
+    color: rgb(95, 34, 58);
+  }
+  
+  .type_bug {
+    background-color: #ab2;
+    color: rgb(53, 58, 11);
+  }
+  
+  .type_rock {
+    background-color: #ba6;
+    color: rgb(73, 66, 41) ;
+  }
+  
+  .type_ghost {
+    background-color: #66b;
+    color:rgb(37, 37, 66);
+  }
+  
+  .type_dragon {
+    background-color: #76e;
+    color: rgb(44, 38, 86);
+  }
+  
+  .type_dark {
+    background-color: #754;
+    color: rgb(47, 34, 27);
+  }
+  
+  .type_steel {
+    background-color: #aab;
+    color: rgb(62, 62, 67);
+  }
+  
+  .type_fairy {
+    background-color: #e9e;
+    color: rgb(78, 51, 78);
+  }
+
+  .data_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: .5em;
+  }
+
+  .data_container div {
+    margin: 1em 0;
+    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .data_height {
+    border-right: 1px solid #ccc;
+  }
