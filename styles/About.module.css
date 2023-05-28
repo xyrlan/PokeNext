@@ -13,3 +13,11 @@
     margin: 0 auto 1.5em;
     line-height: 1.4;
 }
+
+.absolute {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  animation: slideFromRight 5s ease-in-out;
+}
+

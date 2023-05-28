@@ -16,12 +16,14 @@
 .title span {
     color: #333;
 }
-
+/* 
 .pokemon_container {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
+    grid-row: auto;
+    grid-column: auto;
     justify-content: space-between;
     align-items: center;
     max-width: 1100px;
     margin: 0 auto;
-}
+} */

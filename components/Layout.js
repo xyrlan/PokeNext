@@ -12,7 +12,7 @@ export default function Layout({children}) {
             <title>PokeNext</title>
         </Head>
             <Navbar />
-            <main className='main-container'>{children}</main>
+            <main className='bg-[#333]  font-start'>{children}</main>
             <Footer />
         </>
 

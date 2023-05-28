@@ -1,10 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@100;200;300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: 'Bitter', serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .main-container {
-    min-height: 70vh;
+  min-height: 70vh;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes slideFromRight {
+  0% {
+    left: 100%;
+    overflow-x: hidden;
+    opacity: 0.5;
+  }
+
+  100% {
+    left: 20%;
+    opacity: 1;
+    overflow-x: hidden;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-600px);
+    overflow-x: hidden;
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+    overflow-x: hidden;
+  }
+}
+
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-200px);
+    overflow-y: hidden;
+    
+  }
+
+  100% {
+    transform: translateY(0px);
+    overflow-y: hidden;
+  }
+}
+
+#image-slide-top {
+
+  animation: slideFromTop 2s ease-in-out;
+}
+
+#image-slide-right {
+  animation: slideFromRight 1.5s ease-in-out;
+}
+
+#image-slide-left {
+  animation: slideFromLeft 1.5s  ease-in-out;
+}
+
+
+
+.type_normal {
+  background-color: #aa9;
+  color: rgb(93, 93, 82);
+  ;
+}
+
+.type_fire {
+  background-color: #f42;
+  color: rgb(81, 24, 14);
+  ;
+}
+
+.type_water {
+  background-color: #39f;
+  color: rgb(19, 55, 92);
+}
+
+.type_eletric {
+  background-color: #fc3;
+  color: rgb(107, 85, 20);
+}
+
+.type_grass {
+  background-color: #7c5;
+  color: rgb(47, 79, 34);
+}
+
+.type_ice {
+  background-color: #6cf;
+  color: rgb(35, 68, 85);
+  ;
+}
+
+.type_fighting {
+  background-color: #b54;
+  color: rgb(62, 29, 23);
+}
+
+.type_poison {
+  background-color: #a59;
+  color: rgb(72, 36, 65);
+}
+
+.type_ground {
+  background-color: #db5;
+  color: rgb(77, 66, 31);
+}
+
+.type_flying {
+  background-color: #89f;
+  color: rgb(46, 51, 81);
+}
+
+.type_psychic {
+  background-color: #f59;
+  color: rgb(95, 34, 58);
+}
+
+.type_bug {
+  background-color: #ab2;
+  color: rgb(53, 58, 11);
+}
+
+.type_rock {
+  background-color: #ba6;
+  color: rgb(73, 66, 41);
+}
+
+.type_ghost {
+  background-color: #66b;
+  color: rgb(37, 37, 66);
+}
+
+.type_dragon {
+  background-color: #76e;
+  color: rgb(44, 38, 86);
+}
+
+.type_dark {
+  background-color: #754;
+  color: rgb(47, 34, 27);
+}
+
+.type_steel {
+  background-color: #aab;
+  color: rgb(62, 62, 67);
+}
+
+.type_fairy {
+  background-color: #e9e;
+  color: rgb(78, 51, 78);
 }

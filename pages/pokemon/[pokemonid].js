@@ -4,17 +4,17 @@ import styles from "../../styles/Pokemon.module.css"
 
 
 
-export const getStaticPaths = async() => {
+export const getStaticPaths = async () => {
 
-    const maxPokemons = 721
+    const maxPokemons = 1008
     const api = 'https://pokeapi.co/api/v2/pokemon'
-    
+
     const res = await fetch(`${api}/?limit=${maxPokemons}`)
     const data = await res.json()
 
     const paths = data.results.map((pokemon, index) => {
 
-            return {
+        return {
             params: { pokemonid: (index + 1).toString() },
         }
 
@@ -25,38 +25,46 @@ export const getStaticPaths = async() => {
     }
 }
 
-export const getStaticProps = async(context) => {
+export const getStaticProps = async (context) => {
     const id = context.params.pokemonid
 
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
     const data = await res.json()
 
-    console.log(id)
-    
-
-    return{
-        props: {pokemon: data},
+    return {
+        props: { pokemon: data,
+         },
+        
     }
-
-
-
 }
 
-export default function Pokemon ({ pokemon }) {
-    const paddedId =
-    pokemon.id < 10 ? "00" + pokemon.id :
-    pokemon.id < 100 ? "0" + pokemon.id :
-    pokemon.id.toString();
-    const imageUrl = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`
-    return(
-        <div className={styles.pokemon_container}>
+export default function Pokemon({ pokemon, params }) {
+
+console.log(pokemon)
+
+    // const paddedId =
+    //     pokemon.id < 10 ? "00" + pokemon.id :
+    //         pokemon.id < 100 ? "0" + pokemon.id :
+    //             pokemon.id.toString();
+
+    const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
+    return (
+        <div className='flex flex-col justify-center items-center relative'>
+
+            {pokemon.types.map((item, index) => (
+                <Image
+                    src={imageUrl}
+                    width={200}
+                    height={200}
+                    alt={pokemon.name}
+                    className={`left-0 absolute rounded-xl  
+                    `}
+                />
+            ))}
+
             <h1 className={styles.title}>{pokemon.name}</h1>
-            <Image
-            src={imageUrl}
-            width={200}
-            height={200}
-            alt={pokemon.name}
-            />
+
+
             <div>
                 <p>#{pokemon.id}</p>
             </div>

@@ -7,17 +7,17 @@ import styles from '../styles/Navbar.module.css'
 export default function Navbar() {
 
     return (
-        <nav className={styles.navbar}>
-            <div className={styles.logo}>
+        <nav className={`${styles.navbar} `}>
+            <Link href={'/'}>
+            <div className='flex justify-center items-center gap-2'>
                 <Image 
-                src="/images/pokeball.png" 
-                width={30} 
-                height={30} 
+                src="/images/pokeball3d.png" 
+                width={40} 
+                height={40} 
                 alt="PokeNext"
                 />
-                
-                <h1>PokeNext</h1>
             </div>
+            </Link>
             <ul className={styles.link_items}>
                 <li>
                     <Link href="/">Home</Link>
@@ -26,6 +26,6 @@ export default function Navbar() {
                     <Link href="/about">Sobre</Link>
                 </li>
             </ul>
-        </nav>
+        </nav >
     )
 }

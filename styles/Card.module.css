@@ -61,11 +61,3 @@
     color: white;
 } */
 
-.card .image {
-    transition: 0.4s;
-
-}
-
-.card .image:hover {
-    scale: 105%;
-}
