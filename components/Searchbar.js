@@ -13,10 +13,10 @@ export default function SearchBar({ onSearch }) {
 
   return (
     <div>
-    <div className={styles.searchbar}>
-      <input className={styles.placeholder}
+    <div className=''>
+      <input className='w-full outline-none text-white bg-[#333] p-2 text-sm '
         type="search"
-        placeholder="Pesquisar Pokemons..."
+        placeholder="Pesquisar Pokemons (id's, types)..."
         value={searchTerm}
         onChange={handleInputChange}
       />

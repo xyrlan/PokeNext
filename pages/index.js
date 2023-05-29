@@ -8,6 +8,7 @@ import Card from '../components/Card'
 import SearchBar from '../components/Searchbar';
 import React, { useState, useEffect } from 'react';
 import { pokemonData } from '@/components/pokemonData'
+import FilterButtons from '@/components/FilterButtons'
 
 export async function getStaticProps() {
 
@@ -63,61 +64,96 @@ export default function Home({ pokemons }) {
 
   // console.log(pokemontype.slice(1000));
 
-  const [filteredPokemons, setFilteredPokemons] = useState(pokemonData);
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
+  const [selectedGenerationFilters, setSelectedGenerationFilters] = useState([
+    { start: 0, end: 151 } 
+  ]);
+  const [selectedTypeFilters, setSelectedTypeFilters] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (query) => {
-    const filtered = pokemonData.filter((pokemon) => {
-      const idString = pokemon.id.toString();
-      const typeStrings = pokemon.types.map((type) => type.toString());
-      return (
-        pokemon.name.toLowerCase().includes(query.toLowerCase()) ||
-        idString === query ||
-        typeStrings.some((type) =>
-          type.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    });
-  
-    setFilteredPokemons(filtered);
+    setSearchQuery(query);
   };
-  
+
   const handleGenerationFilter = (start, end) => {
-    // Verifica se o filtro já foi selecionado antes de adicioná-lo
-    const isSelected = selectedFilters.find(
+    const isFilterSelected = selectedGenerationFilters.some(
       (filter) => filter.start === start && filter.end === end
     );
-  
-    if (isSelected) {
-      // Remove o filtro selecionado se já estava selecionado
-      const updatedFilters = selectedFilters.filter(
-        (filter) => !(filter.start === start && filter.end === end)
+
+    if (isFilterSelected) {
+      const updatedFilters = selectedGenerationFilters.filter(
+        (filter) => filter.start !== start || filter.end !== end
       );
-      setSelectedFilters(updatedFilters);
+      setSelectedGenerationFilters(updatedFilters);
     } else {
-      // Adiciona o filtro selecionado à lista de filtros
-      const newFilter = { start, end };
-      setSelectedFilters([...selectedFilters, newFilter]);
+      setSelectedGenerationFilters([
+        ...selectedGenerationFilters,
+        { start, end },
+      ]);
     }
   };
-  
-  useEffect(() => {
-    // Aplica os filtros selecionados à lista de Pokémon filtrada
-    let filteredData = pokemonData;
-  
-    selectedFilters.forEach((filter) => {
-      filteredData = filteredData.filter(
-        (pokemon) => pokemon.id >= filter.start && pokemon.id <= filter.end
-      );
-    });
-  
-    setFilteredPokemons(filteredData);
-  }, [selectedFilters]);
 
+  const handleTypeFilter = (type) => {
+    const isFilterSelected = selectedTypeFilters.includes(type);
+
+    if (isFilterSelected) {
+      const updatedFilters = selectedTypeFilters.filter(
+        (filter) => filter !== type
+      );
+      setSelectedTypeFilters(updatedFilters);
+    } else {
+      setSelectedTypeFilters([...selectedTypeFilters, type]);
+    }
+  };
+
+  useEffect(() => {
+    let filteredData = pokemonData;
+
+    if (selectedGenerationFilters.length > 0) {
+      filteredData = filteredData.filter((pokemon) =>
+        selectedGenerationFilters.some(
+          (filter) => pokemon.id >= filter.start && pokemon.id <= filter.end
+        )
+      );
+    }
+
+    if (selectedTypeFilters.length > 0) {
+      filteredData = filteredData.filter((pokemon) =>
+        selectedTypeFilters.some((type) => pokemon.types.includes(type))
+      );
+    }
+
+    if (searchQuery) {
+      filteredData = filteredData.filter((pokemon) => {
+        const idString = pokemon.id.toString();
+        const typeStrings = pokemon.types.map((type) => type.toString());
+        return (
+          pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          idString === searchQuery ||
+          typeStrings.some((type) =>
+            type.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        );
+      });
+    }
+
+    setFilteredPokemons(filteredData);
+  }, [selectedGenerationFilters, selectedTypeFilters, searchQuery, pokemonData]);
+
+  // Funções para verificar se um filtro de geração ou tipo está selecionado
+  const isGenerationFilterSelected = (start, end) => {
+    return selectedGenerationFilters.some(
+      (filter) => filter.start === start && filter.end === end
+    );
+  };
+
+  const isTypeFilterSelected = (type) => {
+    return selectedTypeFilters.includes(type);
+  };
 
   return (
     <>
-      <div className='flex justify-center'>
+      <div className='flex justify-center p-2'>
         <div className='w-fit relative ' >
           <Image
             id='image-slide-top'
@@ -129,25 +165,24 @@ export default function Home({ pokemons }) {
           />
         </div>
       </div>
-      <div>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-      <div>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(0, 151)}>Gen1</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(151, 251)}>Gen2</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(252, 386)}>Gen3</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(387, 493)}>Gen4</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(494, 659)}>Gen5</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(660, 721)}>Gen6</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(722, 809)}>Gen7</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(810, 905)}>Gen8</button>
-        <button className={`${selectedFilters ? 'bg-white' : ''}`} onClick={() => handleGenerationFilter(906, 1008)}>Gen9</button>
-      </div>
-      <div className='grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-2 sm:grid-cols-2 gap-4 gap-x-6 px-[10%]'>
-        {filteredPokemons.map((pokemon) => (
-          <Card key={pokemon.id} pokemon={pokemon} />
 
-        ))}
+      <div className='ml-[15%]'>
+      <SearchBar onSearch={handleSearch} />
+      </div>
+
+      <div className='flex'>
+        <div className='flex flex-col h-fit bg-zinc-900 w-[15%] p-4 rounded-xl shadow-inner shadow-black'>
+          
+          <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} />
+
+        </div>
+        
+        <div className='grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-2 sm:grid-cols-2 gap-4 gap-x-6 p-4 bg-zinc-900 rounded-xl shadow-inner shadow-black'>
+          {filteredPokemons.map((pokemon) => (
+            <Card key={pokemon.id} pokemon={pokemon} />
+
+          ))}
+        </div>
       </div>
     </>
   )
