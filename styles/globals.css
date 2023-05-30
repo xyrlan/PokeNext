@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  font-family: 'Bitter', serif;
+  font-family: 'Monomaniac One', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -29,12 +31,14 @@
 
 @keyframes slideFromRight {
   0% {
+    transform: translateX(1200px);
     left: 100%;
     overflow-x: hidden;
     opacity: 0.5;
   }
 
   100% {
+    transform: translateX(0px);
     left: 20%;
     opacity: 1;
     overflow-x: hidden;
@@ -57,28 +61,33 @@
 
 @keyframes slideFromTop {
   0% {
-    transform: translateY(-200px);
+    /* transform: translateY(-400px); */
     overflow-y: hidden;
-    
+    opacity: 0;
+    scale: 0%;
   }
 
   100% {
-    transform: translateY(0px);
+    /* transform: translateY(0px); */
     overflow-y: hidden;
+    opacity: 1;
+    scale: 100%;
   }
 }
 
 #image-slide-top {
 
-  animation: slideFromTop 2s ease-in-out;
+  animation: slideFromTop 3s ease-out forwards;
 }
 
 #image-slide-right {
-  animation: slideFromRight 1.5s ease-in-out;
+  animation: slideFromRight 1.5s ease-out forwards;
+
 }
 
 #image-slide-left {
-  animation: slideFromLeft 1.5s  ease-in-out;
+  animation: slideFromLeft 1.5s  ease-out forwards;
+  
 }
 
 
@@ -100,8 +109,8 @@
   color: rgb(19, 55, 92);
 }
 
-.type_eletric {
-  background-color: #fc3;
+.type_electric {
+  background-color: rgb(251, 202, 55);
   color: rgb(107, 85, 20);
 }
 

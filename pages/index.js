@@ -16,6 +16,7 @@ export async function getStaticProps() {
 
   const api = 'https://pokeapi.co/api/v2/pokemon'
   const res = await fetch(`${api}/?limit=${maxPokemons}`)
+
   const data = await res.json()
 
   data.results.forEach((item, index) => {
@@ -35,7 +36,6 @@ export async function getStaticProps() {
   }
 }
 
-
 export default function Home({ pokemons }) {
 
 
@@ -50,6 +50,8 @@ export default function Home({ pokemons }) {
   //       return {
   //         ...pokemon,
   //         types: pokemonData.types.map((type) => type.type.name),
+  //         statsName: pokemonData.stats.slice(0, 3).map(stat => stat.stat.name),
+  //         stats: pokemonData.stats.slice(0, 3).map(stat => stat.base_stat),
 
   //       };
   //     });
@@ -62,11 +64,12 @@ export default function Home({ pokemons }) {
 
   // }, []);
 
-  // console.log(pokemontype.slice(1000));
+  // console.log(pokemontype.slice(999, 1008));
+
 
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [selectedGenerationFilters, setSelectedGenerationFilters] = useState([
-    { start: 0, end: 151 } 
+    { start: 0, end: 151 }
   ]);
   const [selectedTypeFilters, setSelectedTypeFilters] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -154,30 +157,35 @@ export default function Home({ pokemons }) {
   return (
     <>
       <div className='flex justify-center p-2'>
-        <div className='w-fit relative ' >
+        <div className='flex items-center justify-center max-w-full overflow-hidden' >
+
+          <Image id='image-slide-left' className='' src='https://unite.pokemon.com/images/pokemon/gengar/stat/stat-gengar.png' width={250} height={250} alt='gengar' />
+
           <Image
             id='image-slide-top'
             className=''
             src="/images/pokemon-logo-black.png"
-            width={500}
+            width={400}
             height={250}
             alt="PokeNext"
           />
+          <Image id='image-slide-right' className='' src='https://unite.pokemon.com/images/pokemon/charizard/stat/stat-charizard.png' width={300} height={300} alt='charizard' />
+
         </div>
       </div>
 
       <div className='ml-[15%]'>
-      <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} />
       </div>
 
       <div className='flex'>
-        <div className='flex flex-col h-fit bg-zinc-900 w-[15%] p-4 rounded-xl shadow-inner shadow-black'>
-          
+        <div className='flex flex-col h-fit bg-zinc-900 max-w-[15%] p-4 rounded-xl shadow-inner shadow-black'>
+
           <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} />
 
         </div>
-        
-        <div className='grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-2 sm:grid-cols-2 gap-4 gap-x-6 p-4 bg-zinc-900 rounded-xl shadow-inner shadow-black'>
+
+        <div className='grid xl:grid-cols-6 h-fit w-full lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-1 grid-flow-row grid-auto-rows sm:grid-cols-2 gap-4 gap-x-6 p-4 bg-zinc-900 rounded-xl shadow-inner shadow-black'>
           {filteredPokemons.map((pokemon) => (
             <Card key={pokemon.id} pokemon={pokemon} />
 
