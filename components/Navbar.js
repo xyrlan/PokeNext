@@ -2,9 +2,22 @@ import Link from "next/link"
 import Image from "next/image"
 
 import styles from '../styles/Navbar.module.css'
+import { useState, useEffect } from "react"
+import { useRouter } from "next/router"
 
 
 export default function Navbar() {
+
+    const [selected, setSelected] = useState('home');
+    const router = useRouter();
+
+    useEffect(() => {
+        if (router.pathname === '/') {
+          setSelected('home');
+        } else if (router.pathname === '/about') {
+          setSelected('about');
+        }
+      }, [router.pathname]);
 
     return (
         <nav className='flex justify-between items-center p-3 from-red-500 via-[#333] to-black via-30% bg-gradient-to-r border-b border-zinc-400'>
@@ -18,12 +31,12 @@ export default function Navbar() {
                 />
             </div>
             </Link>
-            <ul className={styles.link_items}>
+            <ul className='flex justify-between gap-5 border-b border-black group px-4 ' >
                 <li>
-                    <Link href="/">Home</Link>
+                    <Link className={`duration-200border-b py-2 border-black group hover:border-b-red-500  ${selected === 'home' ? 'text-red-500' : 'text-zinc-500'}`} href="/">Home</Link>
                 </li>
                 <li>
-                    <Link href="/about">Sobre</Link>
+                    <Link className={`duration-200 border-b py-2 border-black group hover:border-b-red-500 ${selected === 'about' ? 'text-red-500' : 'text-zinc-500'}`} href="/about">Sobre</Link>
                 </li>
             </ul>
         </nav >

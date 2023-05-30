@@ -12,31 +12,31 @@ import FilterButtons from '@/components/FilterButtons'
 import useBookmark from '@/components/bookmarkhook'
 import usePokemonFilter from '@/components/usePokemonFilter'
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
-  const maxPokemons = 1008
+//   const maxPokemons = 1008
 
-  const api = 'https://pokeapi.co/api/v2/pokemon'
-  const res = await fetch(`${api}/?limit=${maxPokemons}`)
+//   const api = 'https://pokeapi.co/api/v2/pokemon'
+//   const res = await fetch(`${api}/?limit=${maxPokemons}`)
 
-  const data = await res.json()
+//   const data = await res.json()
 
-  data.results.forEach((item, index) => {
-    const id = index + 1;
-    if (id < 10) {
-      item.id = '00' + id;
-    } else if (id < 100) {
-      item.id = '0' + id;
-    } else {
-      item.id = id.toString();
-    }
-  });
-  return {
-    props: {
-      pokemons: data.results,
-    },
-  }
-}
+//   data.results.forEach((item, index) => {
+//     const id = index + 1;
+//     if (id < 10) {
+//       item.id = '00' + id;
+//     } else if (id < 100) {
+//       item.id = '0' + id;
+//     } else {
+//       item.id = id.toString();
+//     }
+//   });
+//   return {
+//     props: {
+//       pokemons: data.results,
+//     },
+//   }
+// }
 
 export default function Home({ pokemons }) {
 
@@ -78,6 +78,7 @@ export default function Home({ pokemons }) {
     handleTypeFilter,
     isGenerationFilterSelected,
     isTypeFilterSelected,
+    isLoading,
   } = usePokemonFilter(pokemonData);
 
 
@@ -116,15 +117,32 @@ export default function Home({ pokemons }) {
         <div className='sm:flex'>
           <div className='flex flex-col h-fit bg-zinc-900 sm:max-w-[15%] mt-2 p-4 rounded-xl shadow-inner shadow-black'>
 
-            <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} />
+            <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} pokemonData={pokemonData} />
 
           </div>
 
           <div className='grid xl:grid-cols-6 h-fit w-full lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-1 grid-flow-row grid-auto-rows sm:grid-cols-2 gap-4 gap-x-6 p-4 m-2 bg-zinc-900 rounded-xl shadow-inner shadow-black'>
-            {filteredPokemons.map((pokemon) => (
-              <Card key={pokemon.id} pokemon={pokemon} handleBookmark={handleBookmark} selectedPokemon={selectedPokemon} />
 
-            ))}
+            {isLoading ? (
+             
+              <Image
+                className='animate-spin '
+                src="/images/pokeballatt.png"
+                width={30}
+                height={30}
+                alt="PokeNext"
+              />
+              
+            ) : (
+              filteredPokemons.map((pokemon) => (
+                <Card
+                  key={pokemon.id}
+                  pokemon={pokemon}
+                  handleBookmark={handleBookmark}
+                  selectedPokemon={selectedPokemon}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

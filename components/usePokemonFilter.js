@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from 'react';
 
 const usePokemonFilter = (pokemonData) => {
@@ -9,6 +7,7 @@ const usePokemonFilter = (pokemonData) => {
   ]);
   const [selectedTypeFilters, setSelectedTypeFilters] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -46,37 +45,42 @@ const usePokemonFilter = (pokemonData) => {
   };
 
   useEffect(() => {
-    let filteredData = pokemonData;
+    setIsLoading(true);
 
-    if (selectedGenerationFilters.length > 0) {
-      filteredData = filteredData.filter((pokemon) =>
-        selectedGenerationFilters.some(
-          (filter) => pokemon.id >= filter.start && pokemon.id <= filter.end
-        )
-      );
-    }
+    setTimeout(() => {
+      let filteredData = pokemonData;
 
-    if (selectedTypeFilters.length > 0) {
-      filteredData = filteredData.filter((pokemon) =>
-        selectedTypeFilters.some((type) => pokemon.types.includes(type))
-      );
-    }
-
-    if (searchQuery) {
-      filteredData = filteredData.filter((pokemon) => {
-        const idString = pokemon.id.toString();
-        const typeStrings = pokemon.types.map((type) => type.toString());
-        return (
-          pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          idString === searchQuery ||
-          typeStrings.some((type) =>
-            type.toLowerCase().includes(searchQuery.toLowerCase())
+      if (selectedGenerationFilters.length > 0) {
+        filteredData = filteredData.filter((pokemon) =>
+          selectedGenerationFilters.some(
+            (filter) => pokemon.id >= filter.start && pokemon.id <= filter.end
           )
         );
-      });
-    }
+      }
 
-    setFilteredPokemons(filteredData);
+      if (selectedTypeFilters.length > 0) {
+        filteredData = filteredData.filter((pokemon) =>
+          selectedTypeFilters.some((type) => pokemon.types.includes(type))
+        );
+      }
+
+      if (searchQuery) {
+        const searchQueryLowercase = searchQuery.toLowerCase();
+        filteredData = filteredData.filter((pokemon) => {
+          const idString = pokemon.id.toString();
+          const typeStrings = pokemon.types.map((type) => type.toString());
+          return (
+            pokemon.name.toLowerCase().includes(searchQueryLowercase) ||
+            idString === searchQuery ||
+            typeStrings.some((type) => type.includes(searchQueryLowercase))
+          );
+        });
+      }
+
+      setFilteredPokemons(filteredData);
+      setIsLoading(false);
+    }, 0); // Removido o tempo de espera artificial
+
   }, [selectedGenerationFilters, selectedTypeFilters, searchQuery, pokemonData]);
 
   const isGenerationFilterSelected = (start, end) => {
@@ -91,6 +95,7 @@ const usePokemonFilter = (pokemonData) => {
 
   return {
     filteredPokemons,
+    isLoading,
     handleSearch,
     handleGenerationFilter,
     handleTypeFilter,
