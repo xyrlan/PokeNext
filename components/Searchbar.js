@@ -15,7 +15,7 @@ export default function SearchBar({ onSearch }) {
   return (
     <div className=' flex items-center'>
       <Image src='/images/search-icon.svg' width={16} height={16} alt="search-icon" />
-      <input className='w-full outline-none text-white bg-[#333] p-2 text-sm '
+      <input className='w-full shadow-inner shadow-black rounded-xl outline-none text-white bg-zinc-900 p-2 text-sm '
         type="search"
         placeholder="Pesquisar Pokemons (id's, types)..."
         value={searchTerm}

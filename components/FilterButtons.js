@@ -1,4 +1,10 @@
+import usePokemonFilter from "./usePokemonFilter";
+
+
+
 export default function FilterButtons({ handleGenerationFilter, isGenerationFilterSelected, handleTypeFilter, isTypeFilterSelected }) {
+    
+
 
     return (
         <>
@@ -21,6 +27,7 @@ export default function FilterButtons({ handleGenerationFilter, isGenerationFilt
                 <div className="text-zinc-500 group ">
                     <h1 className="select-none cursor-pointer group-hover:text-zinc-200 duration-300">Types</h1>
                     <div className="flex-col text-sm hidden group-hover:flex duration-500 gap-1">
+                        {}
                         <button
                             onClick={() => handleTypeFilter('grass')}
                             className={isTypeFilterSelected('grass') ? 'text-zinc-200' : 'hover:text-zinc-400 text-zinc-500'}>

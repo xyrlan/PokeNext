@@ -9,6 +9,8 @@ import SearchBar from '../components/Searchbar';
 import React, { useState, useEffect } from 'react';
 import { pokemonData } from '@/components/pokemonData'
 import FilterButtons from '@/components/FilterButtons'
+import useBookmark from '@/components/bookmarkhook'
+import usePokemonFilter from '@/components/usePokemonFilter'
 
 export async function getStaticProps() {
 
@@ -65,131 +67,58 @@ export default function Home({ pokemons }) {
   // }, []);
 
   // console.log(pokemontype.slice(999, 1008));
+  
+  const { selectedPokemon, handleBookmark } = useBookmark();
+  console.log(selectedPokemon)
+  
+  const {
+    filteredPokemons,
+    handleSearch,
+    handleGenerationFilter,
+    handleTypeFilter,
+    isGenerationFilterSelected,
+    isTypeFilterSelected,
+  } = usePokemonFilter(pokemonData);
 
-
-  const [filteredPokemons, setFilteredPokemons] = useState([]);
-  const [selectedGenerationFilters, setSelectedGenerationFilters] = useState([
-    { start: 0, end: 151 }
-  ]);
-  const [selectedTypeFilters, setSelectedTypeFilters] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-  };
-
-  const handleGenerationFilter = (start, end) => {
-    const isFilterSelected = selectedGenerationFilters.some(
-      (filter) => filter.start === start && filter.end === end
-    );
-
-    if (isFilterSelected) {
-      const updatedFilters = selectedGenerationFilters.filter(
-        (filter) => filter.start !== start || filter.end !== end
-      );
-      setSelectedGenerationFilters(updatedFilters);
-    } else {
-      setSelectedGenerationFilters([
-        ...selectedGenerationFilters,
-        { start, end },
-      ]);
-    }
-  };
-
-  const handleTypeFilter = (type) => {
-    const isFilterSelected = selectedTypeFilters.includes(type);
-
-    if (isFilterSelected) {
-      const updatedFilters = selectedTypeFilters.filter(
-        (filter) => filter !== type
-      );
-      setSelectedTypeFilters(updatedFilters);
-    } else {
-      setSelectedTypeFilters([...selectedTypeFilters, type]);
-    }
-  };
-
-  useEffect(() => {
-    let filteredData = pokemonData;
-
-    if (selectedGenerationFilters.length > 0) {
-      filteredData = filteredData.filter((pokemon) =>
-        selectedGenerationFilters.some(
-          (filter) => pokemon.id >= filter.start && pokemon.id <= filter.end
-        )
-      );
-    }
-
-    if (selectedTypeFilters.length > 0) {
-      filteredData = filteredData.filter((pokemon) =>
-        selectedTypeFilters.some((type) => pokemon.types.includes(type))
-      );
-    }
-
-    if (searchQuery) {
-      filteredData = filteredData.filter((pokemon) => {
-        const idString = pokemon.id.toString();
-        const typeStrings = pokemon.types.map((type) => type.toString());
-        return (
-          pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          idString === searchQuery ||
-          typeStrings.some((type) =>
-            type.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-        );
-      });
-    }
-
-    setFilteredPokemons(filteredData);
-  }, [selectedGenerationFilters, selectedTypeFilters, searchQuery, pokemonData]);
-
-  // Funções para verificar se um filtro de geração ou tipo está selecionado
-  const isGenerationFilterSelected = (start, end) => {
-    return selectedGenerationFilters.some(
-      (filter) => filter.start === start && filter.end === end
-    );
-  };
-
-  const isTypeFilterSelected = (type) => {
-    return selectedTypeFilters.includes(type);
-  };
 
   return (
     <>
-      <div className='flex justify-center p-2'>
-        <div className='flex items-center justify-center max-w-full overflow-hidden' >
+      <div className=''>
+        <div className='flex justify-center p-2'>
+          <div className='flex items-center justify-center max-w-full overflow-hidden' >
 
-          <Image id='image-slide-left' className='' src='https://unite.pokemon.com/images/pokemon/gengar/stat/stat-gengar.png' width={250} height={250} alt='gengar' />
+            <Image id='image-slide-left' className='' src='https://unite.pokemon.com/images/pokemon/gengar/stat/stat-gengar.png' width={250} height={250} alt='gengar' />
 
-          <Image
-            id='image-slide-top'
-            className=''
-            src="/images/pokemon-logo-black.png"
-            width={400}
-            height={250}
-            alt="PokeNext"
-          />
-          <Image id='image-slide-right' className='' src='https://unite.pokemon.com/images/pokemon/charizard/stat/stat-charizard.png' width={300} height={300} alt='charizard' />
+            <Image
+              id='image-slide-top'
+              className=''
+              src="/images/pokemon-logo-black.png"
+              width={400}
+              height={250}
+              alt="PokeNext"
+            />
+            <Image id='image-slide-right' className='' src='https://unite.pokemon.com/images/pokemon/charizard/stat/stat-charizard.png' width={300} height={300} alt='charizard' />
 
-        </div>
-      </div>
-
-      <div className='ml-[15%]'>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-
-      <div className='flex'>
-        <div className='flex flex-col h-fit bg-zinc-900 max-w-[15%] p-4 rounded-xl shadow-inner shadow-black'>
-
-          <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} />
-
+          </div>
         </div>
 
-        <div className='grid xl:grid-cols-6 h-fit w-full lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-1 grid-flow-row grid-auto-rows sm:grid-cols-2 gap-4 gap-x-6 p-4 bg-zinc-900 rounded-xl shadow-inner shadow-black'>
-          {filteredPokemons.map((pokemon) => (
-            <Card key={pokemon.id} pokemon={pokemon} />
+        <div className='m-1'>
+          <SearchBar onSearch={handleSearch} />
+        </div>
 
-          ))}
+        <div className='sm:flex'>
+          <div className='flex flex-col h-fit bg-zinc-900 sm:max-w-[15%] mt-2 p-4 rounded-xl shadow-inner shadow-black'>
+
+            <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} />
+
+          </div>
+
+          <div className='grid xl:grid-cols-6 h-fit w-full lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-1 grid-flow-row grid-auto-rows sm:grid-cols-2 gap-4 gap-x-6 p-4 m-2 bg-zinc-900 rounded-xl shadow-inner shadow-black'>
+            {filteredPokemons.map((pokemon) => (
+              <Card key={pokemon.id} pokemon={pokemon} handleBookmark={handleBookmark} selectedPokemon={selectedPokemon} />
+
+            ))}
+          </div>
         </div>
       </div>
     </>

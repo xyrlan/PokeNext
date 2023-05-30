@@ -13,7 +13,7 @@ export default function Layout({children}) {
             <title>PokeNext</title>
         </Head>
             <Navbar />
-            <main className='bg-[#333] px-[8%]'>{children}</main>
+            <main className='bg-[#333] from-black to-[#333] bg-gradient-to-t from-70% px-[7%]'>{children}</main>
             <Footer />
         </>
 

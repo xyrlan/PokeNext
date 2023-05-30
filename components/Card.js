@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/Pokemon.module.css'
 
 
-export default function Card({ pokemon }) {
+export default function Card({ pokemon, handleBookmark, selectedPokemon }) {
 
 
     const typeClasses = {
@@ -50,17 +50,17 @@ export default function Card({ pokemon }) {
         fairy: 'group-hover:text-[#e9e]',
     }
 
-    const fadeInClass = "animate-fade-in"
 
     return (
         <>
 
-            <Link href={`/pokemon/${parseInt(pokemon.id, 10).toString()}`}
-                className={`flex row h-fit gap-[2%] hover:p-2 hover:justify-center relative rounded-xl shadow-md shadow-black bg-gray-600 hover:scale-125 ease-out duration-300 hover:z-50 hover:brightness-125 hover:row-span-2 hover:bg-gray-950 ${fadeInClass} group`}>
+            <div
+                id="animate-fade-in"
+                className={`flex h-fit gap-[2%] hover:pt-3 hover:justify-center relative rounded-xl shadow-md shadow-black bg-gray-600 hover:z-50 hover:scale-125 hover:row-span-2 hover:bg-gray-950 group duration-150 ease-out transition hover:ease-in`}>
 
                 <div className="z-10 flex p-2 h-fit items-center gap-2 group-hover:flex-col max-sm:flex-col">
 
-                    <div className='border border-gray-600 shadow-inner rounded-full relative w-12 h-12 flex justify-center items-center group-hover:mb-2 group-hover:ml-2' href={`/pokemon/${parseInt(pokemon.id, 10).toString()}`}>
+                    <Link href={`/pokemon/${parseInt(pokemon.id, 10).toString()}`} className='border border-gray-600 shadow-inner rounded-full relative w-12 h-12 flex justify-center items-center group-hover:scale-125'>
                         {
                             pokemon.types.map((type, index) => (
                                 <div
@@ -75,54 +75,60 @@ export default function Card({ pokemon }) {
                         }
 
                         <Image
-                            className="absolute group-hover:scale-125 duration-300 "
+                            className="absolute group-hover:scale-125 duration-500 w-auto h-auto"
                             // src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png`}
                             src={`${pokemon.id < 649 ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif` : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}`}
                             width={40}
                             height={40}
                             alt={pokemon.name}
                         />
-                    </div>
+                    </Link>
 
 
-                    <div className="flex items-center">
+                    <div  className="flex items-center">
                         <div className="flex items-center">
-                            <div className="" href={`/pokemon/${parseInt(pokemon.id, 10).toString()}`}>
+                            <Link className="" href={`/pokemon/${parseInt(pokemon.id, 10).toString()}`}>
                                 <div>
                                     <p className='text-[#333] border-b border-b-[#333] text-xs '>No. {pokemon.id}</p>
                                     <h3 className={`text-zinc-900 rounded text-base font-bold m-1 ${pokemon.types.map((type) => typeColors[type])[0]}`}> {pokemon.name} </h3>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
 
 
-                        <div className={`w-4 h-4 absolute right-1 top-1 rounded-full duration-500 cursor-pointer hover:scale-105 hover:bg-neutral-500  bg-gradient-to-b`}>
-                            <Image src={'/images/pokebola-black.png'} width={16} height={16} alt='pokeball' />
+                        <div 
+                        onClick={() => handleBookmark(pokemon.name)}
+                        className={` w-4 h-4 absolute right-1 top-1 duration-500 cursor-pointer`}>
+                            <Image className={`bg-zinc-600 rounded-full h-fit duration-300 ${selectedPokemon.includes(pokemon.name) ? 'opacity-100' : 'opacity-20'}`} 
+                            src={'/images/pokeballatt.png'} width={16} height={16} alt='pokeball' />
                         </div>
                     </div>
                 </div>
 
-                <div className="flex-col sm:opacity-0 duration-300 sm:hidden group-hover:sm:opacity-100 group-hover:sm:flex max-sm:flex justify-center items-center gap-2 text-[#333]">
+                <Link href={`/pokemon/${parseInt(pokemon.id, 10).toString()}`} className="flex-col sm:opacity-0 duration-300 sm:hidden group-hover:sm:opacity-100 group-hover:sm:flex max-sm:flex justify-center items-center gap-2 text-[#333]">
 
                     <div className="flex gap-1">
                         {
                             pokemon.types.map((type, index) => (
-                                <div key={index} className={`rounded border text-xs border-[#333] p-[0.2rem] ${['type_' + type]}`}>{type}</div>
+                                <div key={index} className={`rounded border text-xs shadow px-[0.1rem] shadow-[#333] border-[#333] scale-90 ${['type_' + type]}`}>{type}</div>
                             ))}
                     </div>
+
+
+
                     <div className="flex gap-1 text-sm">
                         <div className="">
                             <div>hp:  </div>
-                            <div>attack: </div>
-                            <div>defense: </div>
+                            <div>atk: </div>
+                            <div>def: </div>
                         </div>
                         <div className="text-zinc-400">
                             {pokemon.stats.map((stat, index) => <p key={index}>{stat}</p>)}
                         </div>
 
                     </div>
-                </div>
-            </Link>
+                </Link>
+            </div>
         </>
     )
 }
