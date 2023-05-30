@@ -11,7 +11,7 @@ export default function About() {
 
             <div id="image-slide-left" className="z-50 flex flex-col justify-center w-fit items-center gap-2 p-20 ">
                 <h1 className="text-4xl text-red-500">Sobre o projeto</h1>
-                <p className=""> <span>Next.js</span></p>
+                <p className="text-white">Projeto feito com ideias proprias utilizando <span className="text-red-500">TypeScript, Next.js e TailwindCSS</span></p>
             </div>
 
         </div>

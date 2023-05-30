@@ -67,10 +67,10 @@ export default function Home({ pokemons }) {
   // }, []);
 
   // console.log(pokemontype.slice(999, 1008));
-  
+
   const { selectedPokemon, handleBookmark } = useBookmark();
   console.log(selectedPokemon)
-  
+
   const {
     filteredPokemons,
     handleSearch,
@@ -83,23 +83,30 @@ export default function Home({ pokemons }) {
 
   return (
     <>
-      <div className=''>
-        <div className='flex justify-center p-2'>
-          <div className='flex items-center justify-center max-w-full overflow-hidden' >
+      <div className='max-w-[1400px]'>
+        <div className='flex items-center justify-center w-full overflow-hidden p-4' >
 
-            <Image id='image-slide-left' className='' src='https://unite.pokemon.com/images/pokemon/gengar/stat/stat-gengar.png' width={250} height={250} alt='gengar' />
+          <div className='relative w-full h-32 flex justify-center items-center'>
+
+            <div id='image-slide-left' className='bg-cover w-72 h-72 mix-blend-overlay' style={{ backgroundImage: "url('https://unite.pokemon.com/images/pokemon/tyranitar/stat/stat-tyranitar-2x.png')" }} >
+              <div id='image-slide-left' className='bg-cover w-40 h-40 mix-blend-normal absolute bottom-10' style={{ backgroundImage: "url('https://unite.pokemon.com/images/pokemon/gengar/stat/stat-gengar.png')" }} />
+            </div>
 
             <Image
               id='image-slide-top'
-              className=''
+              className='absolute'
               src="/images/pokemon-logo-black.png"
-              width={400}
+              width={500}
               height={250}
               alt="PokeNext"
             />
-            <Image id='image-slide-right' className='' src='https://unite.pokemon.com/images/pokemon/charizard/stat/stat-charizard.png' width={300} height={300} alt='charizard' />
 
+            <div id='image-slide-right' className='max-sm:hidden bg-cover w-72 h-72 mix-blend-overlay' style={{ backgroundImage: "url('https://unite.pokemon.com/images/pokemon/lapras/stat/stat-lapras-2x.png')" }} >
+
+              <div id='image-slide-right' className='bg-cover w-40 h-40 mix-blend-normal absolute bottom-10 right-0' style={{ backgroundImage: "url('https://unite.pokemon.com/images/pokemon/dragonite/stat/stat-dragonite.png')" }} />
+            </div>
           </div>
+
         </div>
 
         <div className='m-1'>
