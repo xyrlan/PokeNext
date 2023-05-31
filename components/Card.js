@@ -56,7 +56,7 @@ export default function Card({ pokemon, handleBookmark, selectedPokemon }) {
 
             <div
                 id="animate-fade-in"
-                className={`flex h-fit gap-[2%] hover:pt-3 hover:justify-center relative rounded-xl shadow-md shadow-black bg-gray-600 hover:z-50 hover:scale-125 hover:row-span-2 hover:bg-gray-950 group duration-150 ease-out transition hover:ease-in`}>
+                className={`flex h-fit gap-[2%] hover:pt-3 hover:justify-center relative rounded-xl shadow-md shadow-black bg-gray-600 hover:z-50 hover:scale-125 hover:row-span-2 hover:bg-white group duration-150 ease-out transition hover:ease-in`}>
 
                 <div className="z-10 flex p-2 h-fit items-center gap-2 group-hover:flex-col max-sm:flex-col">
 
@@ -78,8 +78,8 @@ export default function Card({ pokemon, handleBookmark, selectedPokemon }) {
                             className="absolute group-hover:scale-125 duration-500 w-auto h-auto"
                             // src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png`}
                             src={`${pokemon.id < 649 ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif` : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}`}
-                            width={40}
-                            height={40}
+                            width={50}
+                            height={50}
                             alt={pokemon.name}
                         />
                     </Link>
@@ -110,7 +110,7 @@ export default function Card({ pokemon, handleBookmark, selectedPokemon }) {
                     <div className="flex gap-1">
                         {
                             pokemon.types.map((type, index) => (
-                                <div key={index} className={`rounded border text-xs shadow px-[0.1rem] shadow-[#333] border-[#333] scale-90 ${['type_' + type]}`}>{type}</div>
+                                <div key={index} className={`rounded border text-sm shadow px-[0.1rem] shadow-[#333] border-[#333] scale-90 ${['type_' + type]}`}>{type}</div>
                             ))}
                     </div>
 

@@ -79,7 +79,7 @@ const usePokemonFilter = (pokemonData) => {
 
       setFilteredPokemons(filteredData);
       setIsLoading(false);
-    }, 0); // Removido o tempo de espera artificial
+    }, 0);
 
   }, [selectedGenerationFilters, selectedTypeFilters, searchQuery, pokemonData]);
 

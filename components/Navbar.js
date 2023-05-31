@@ -22,7 +22,7 @@ export default function Navbar() {
     return (
         <nav className='flex justify-between items-center p-3 from-red-500 via-[#333] to-black via-30% bg-gradient-to-r border-b border-zinc-400'>
             <Link className=" hover:animate-spin" href={'/'}>
-            <div className='flex justify-center items-center gap-2'>
+            <div className='flex justify-center items-center gap-2 select-none'>
                 <Image 
                 src="/images/pokemon_121114.png" 
                 width={40} 

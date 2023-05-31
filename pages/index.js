@@ -69,7 +69,7 @@ export default function Home({ pokemons }) {
   // console.log(pokemontype.slice(999, 1008));
 
   const { selectedPokemon, handleBookmark } = useBookmark();
-  console.log(selectedPokemon)
+  
 
   const {
     filteredPokemons,
@@ -84,8 +84,9 @@ export default function Home({ pokemons }) {
 
   return (
     <>
-      <div className='max-w-[1400px] min-h-screen'>
-        <div className='flex items-center justify-center w-full overflow-hidden p-4' >
+      <div className=' bg-[#333] min-h-screen px-[7%]'>
+        
+        <div className='flex items-center justify-center w-full overflow-hidden p-4 max-w-[1400px]' >
 
           <div className='relative w-full h-32 flex justify-center items-center'>
 

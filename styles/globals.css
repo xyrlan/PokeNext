@@ -90,6 +90,17 @@
   
 }
 
+.circle {
+  /* width: 374px; */
+  /* height: 150px; */
+  /* background-color: transparent; */
+
+  
+  /* border-radius: 50%;  */
+  transform: rotateX(60deg) rotateY(0deg); 
+   /* box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);  */
+}
+
 
 
 .type_normal {
