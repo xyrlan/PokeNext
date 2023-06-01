@@ -10,10 +10,9 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.6.0",
-<<<<<<< HEAD
-=======
+
     "dotenv": "^16.1.3",
->>>>>>> 80691518661757cd7ef7f53b3743493ffc124ec0
+
     "next": "13.3.0",
     "pokeapi-js-wrapper": "^1.2.2",
     "react": "18.2.0",
