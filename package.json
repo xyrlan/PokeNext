@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^2.6.0",
     "next": "13.3.0",
     "pokeapi-js-wrapper": "^1.2.2",
     "react": "18.2.0",
