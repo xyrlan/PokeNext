@@ -110,8 +110,8 @@ export default function Pokemon({ pokemon, pokemontypes }) {
                         <h1 className='text-white max-sm:text-5xl mt-5 text-6xl rounded-tl-3xl shadow-70% bg-gradient-to-r w-fit mb-5 from-red-500 '><span className="mr-5 text-4xl text-zinc-400">#{pokemon.id}</span>{pokemon.name}</h1>
                         <div className="relative h-[374px] w-[374px] max-lg:h-[300px] max-lg:w-[300px] max-md:h-[250px] max-md:w-[250px] max-sm:w-[200px] max-sm:h-[200px]">
 
-                            <div className="w-full h-full absolute bg-cover z-10 " style={{ backgroundImage: `url(${imageUrl})` }}></div>
-                            <div className={` ${['type_' + type]} circle shadow-2xl rounded-[50%] ${typeClasses[type]} absolute animate-pulse -bottom-7 z-0 max-lg:w-[300px] max-md:w-[250px] w-[374px] h-[150px] max-sm:w-[200px]`} />
+                            <div className="w-full h-full absolute bg-cover z-10" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+                            <div className={` ${['type_' + type]} circle shadow-2xl rounded-[50%] ${typeClasses[type]} absolute animate-pulse -bottom-5 max-lg:w-[300px] max-md:w-[250px] w-[374px] h-[150px] max-sm:w-[200px] max-sm:-bottom-6 max-sm:h-[100px]`} />
                         </div>
 
                     </div>

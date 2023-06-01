@@ -56,7 +56,7 @@ export default function Card({ pokemon, handleBookmark, selectedPokemon }) {
 
             <div
                 id="animate-fade-in"
-                className={`flex h-fit gap-[2%] hover:pt-3 hover:justify-center relative rounded-xl shadow-md shadow-black bg-gray-600 hover:z-50 hover:scale-125 hover:row-span-2 hover:bg-white group duration-150 ease-out transition hover:ease-in`}>
+                className={`flex h-fit gap-[2%] hover:pt-3 hover:justify-center relative rounded-xl shadow-md shadow-black bg-gray-600 hover:z-50 hover:scale-125 hover:row-span-2 hover:bg-white group duration-150 ease-out transition hover:ease-in max-sm:justify-center `}>
 
                 <div className="z-10 flex p-2 h-fit items-center gap-2 group-hover:flex-col max-sm:flex-col">
 
