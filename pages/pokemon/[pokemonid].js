@@ -111,7 +111,7 @@ export default function Pokemon({ pokemon, pokemontypes }) {
                         <div className="relative h-[374px] w-[374px] max-lg:h-[300px] max-lg:w-[300px] max-md:h-[250px] max-md:w-[250px] max-sm:w-[200px] max-sm:h-[200px]">
 
                             <div className="w-full h-full absolute bg-cover z-10" style={{ backgroundImage: `url(${imageUrl})` }}></div>
-                            <div className={` ${['type_' + type]} circle shadow-2xl rounded-[50%] ${typeClasses[type]} absolute animate-pulse -bottom-7 max-lg:w-[300px] max-md:w-[250px] w-[374px] h-[150px] max-sm:w-[200px] max-sm:-bottom-6 max-sm:h-[100px]`} />
+                            <div className={` ${['type_' + type]} circle shadow-2xl rounded-[50%] ${typeClasses[type]} absolute animate-pulse -bottom-5 max-lg:w-[300px] max-md:w-[250px] w-[374px] h-[150px] max-sm:w-[200px] max-sm:-bottom-6 max-sm:h-[100px]`} />
                         </div>
 
                     </div>
