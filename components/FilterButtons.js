@@ -18,11 +18,11 @@ export default function FilterButtons({ handleGenerationFilter, isGenerationFilt
 
     return (
         <>
-            <div>
+            <div className="relative">
                 <h1 className="text-white text-xl">Filters</h1>
                 <div className="text-zinc-500 group ">
                     <h1 className="select-none cursor-pointer group-hover:text-zinc-200 duration-300">Generations</h1>
-                    <div className=" flex-col text-sm hidden group-hover:flex duration-500 gap-1 max-sm:absolute z-50 max-sm:bg-zinc-900 w-[70%] rounded-xl p-2">
+                    <div className=" flex-col items-start pl-4 text-sm hidden group-hover:flex duration-500 gap-1 max-sm:absolute z-50 w-full rounded-xl p-2 max-sm:border-b max-sm:border-r border-white shadow from-zinc-900 bg-gradient-to-t to-transparent from-90% text-lg">
                         {generationFilters.map((filter) => (
                             <button
                                 key={`${filter.start}-${filter.end}`}
@@ -37,7 +37,7 @@ export default function FilterButtons({ handleGenerationFilter, isGenerationFilt
 
                 <div className="text-zinc-500 group ">
                     <h1 className="select-none cursor-pointer group-hover:text-zinc-200 duration-300">Types</h1>
-                    <div className="flex-col text-sm hidden group-hover:flex duration-500 gap-1 max-sm:absolute z-50 max-sm:bg-zinc-900 w-[70%] rounded-xl p-2">
+                    <div className="flex-col text-sm hidden group-hover:flex duration-500 gap-1 max-sm:absolute z-50 from-zinc-900 bg-gradient-to-t to-transparent from-90% w-full rounded-xl p-2 max-sm:border-b max-sm:border-r border-white text-lg">
 
                         {pokemonData.map((pokemon) => pokemon.types.map((type) => type))
                             .flat()
