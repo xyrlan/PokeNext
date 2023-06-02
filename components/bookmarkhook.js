@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { useUser } from '@auth0/nextjs-auth0/client';
+
 const useBookmark = () => {
   const [selectedPokemon, setselectedPokemon] = useState([]);
+  const { isAuthenticated, user } = useUser();
 
   const handleBookmark = (title) => {
     const isSelected = selectedPokemon.includes(title);
@@ -13,15 +16,18 @@ const useBookmark = () => {
   };
 
   useEffect(() => {
-    const savedselectedPokemon = localStorage.getItem('selectedPokemon');
-    if (savedselectedPokemon) {
-      setselectedPokemon(JSON.parse(savedselectedPokemon));
+    // Carregar os dados do usuário, se estiver autenticado
+    if (isAuthenticated) {
+      setselectedPokemon(user.selectedPokemon || []);
     }
-  }, []);
+  }, [isAuthenticated, user]);
 
   useEffect(() => {
-    localStorage.setItem('selectedPokemon', JSON.stringify(selectedPokemon));
-  }, [selectedPokemon]);
+    // Atualizar os dados do usuário, se estiver autenticado
+    if (isAuthenticated) {
+      user.update({ selectedPokemon });
+    }
+  }, [selectedPokemon, isAuthenticated, user]);
 
   return { selectedPokemon, handleBookmark };
 };
