@@ -56,18 +56,19 @@ export default function Navbar() {
                     />
                 </div>
             </Link>
-            <ul className='flex justify-between gap-5 border-b border-black group  ' >
+            <ul className='flex justify-between gap-5 border-b border-black ' >
                 <li>
-                    <Link className={`duration-200border-b py-2 border-black group hover:border-b-red-500  ${selected === 'home' ? 'text-red-500' : 'text-zinc-500'}`} href="/">Home</Link>
+                    <Link className={`duration-200border-b py-2 border-black hover:border-b-red-500  ${selected === 'home' ? 'text-red-500' : 'text-zinc-500'}`} href="/">Home</Link>
                 </li>
                 <li>
-                    <Link className={`duration-200 border-b py-2 border-black group hover:border-b-red-500 hover:text-white ${selected === 'about' ? 'text-red-500' : 'text-zinc-500'}`} href="/about">Sobre</Link>
+                    <Link className={`duration-200 border-b py-2 border-black hover:border-b-red-500 hover:text-white ${selected === 'about' ? 'text-red-500' : 'text-zinc-500'}`} href="/about">Sobre</Link>
                 </li>
                 {user && (
                 <li>
                         <div className=" group relative">
+
                             <img className="h-10 w-10 rounded-full border border-white " src={user.picture} alt={user.name} />
-                            <div className="hidden group-hover:block group-hover:absolute bg-black p-4 text-end right-0 z-50 w-40">
+                            <div className="hidden group-hover:block group-hover:absolute bg-black p-4 text-end right-0 z-50 min-w-[160px]">
 
                                 <h2 className="text-white duration-200 border-b py-1 border-black group hover:border-b-red-500">{user.name}</h2>
                                 {user.email && (<p className="text-white duration-200 border-b py-2 border-black group hover:border-b-red-500">{user.email}</p> )}
@@ -80,7 +81,7 @@ export default function Navbar() {
                 </li>
                 )}
                 <li className="">
-                    <a className={`${user ? 'hidden' : ''} duration-200 border-b py-2 border-black group hover:border-b-red-500 text-zinc-500 hover:text-white`} href="/api/auth/login">Login</a>
+                    <a className={`${user ? 'hidden' : ''} duration-200 border-b py-2 border-black hover:border-b-red-500 text-zinc-500 hover:text-white`} href="/api/auth/login">Login</a>
                 </li>
 
             </ul>

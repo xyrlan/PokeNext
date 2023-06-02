@@ -124,7 +124,7 @@ export default function Pokemon({ pokemon, pokemontypes }) {
                                 <h3 className="text-lg">Type: </h3>
                                 <div className=''>
                                     {pokemon.types.map((item, index) => (
-                                        <span key={index} className={`text-white m-2 p-1 rounded-lg border-black border ${['type_' + item.type.name]}`}>{item.type.name}</span>
+                                        <span key={index} className={`m-2 px-1 tracking-wider rounded-lg border-black border ${['type_' + item.type.name]}`}>{item.type.name}</span>
 
                                     ))}
                                 </div>
