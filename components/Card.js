@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/Pokemon.module.css'
 
 
-export default function Card({ pokemon, handleBookmark, selectedPokemon }) {
+export default function Card({ pokemon, handleBookmark, isSelectedPokemon }) {
 
 
     const typeClasses = {
@@ -97,9 +97,9 @@ export default function Card({ pokemon, handleBookmark, selectedPokemon }) {
 
 
                         <div 
-                        onClick={() => handleBookmark(pokemon.name)}
+                        onClick={() => handleBookmark(pokemon)}
                         className={` w-4 h-4 absolute right-1 top-1 duration-500 cursor-pointer`}>
-                            <Image className={`bg-zinc-600 rounded-full h-fit duration-300 ${selectedPokemon.includes(pokemon.name) ? 'opacity-100' : 'opacity-20'}`} 
+                            <Image className={`bg-zinc-600 rounded-full h-fit duration-300 ${isSelectedPokemon ? 'opacity-100' : 'opacity-20 hover:opacity-50'}`} 
                             src={'/images/pokeballatt.png'} width={16} height={16} alt='pokeball' />
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import useBookmark from './bookmarkhook';
 
 const usePokemonFilter = (pokemonData) => {
   const [filteredPokemons, setFilteredPokemons] = useState([]);
@@ -9,8 +10,17 @@ const usePokemonFilter = (pokemonData) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
+  const { selectedPokemon, handleBookmark } = useBookmark();
+  const [showSelectedOnly, setShowSelectedOnly] = useState(false);
+
+  console.log(selectedPokemon)
+
   const handleSearch = (query) => {
     setSearchQuery(query);
+  };
+
+  const handleShowSelectedOnly = () => {
+    setShowSelectedOnly(!showSelectedOnly);
   };
 
   const handleGenerationFilter = (start, end) => {
@@ -48,7 +58,14 @@ const usePokemonFilter = (pokemonData) => {
     setIsLoading(true);
 
     setTimeout(() => {
+
       let filteredData = pokemonData;
+
+      if (showSelectedOnly) {
+        filteredData = filteredData.filter((pokemon) =>
+          selectedPokemon.some((selected) => selected.id === pokemon.id)
+        );
+      } else {
 
       if (selectedGenerationFilters.length > 0) {
         filteredData = filteredData.filter((pokemon) =>
@@ -56,7 +73,7 @@ const usePokemonFilter = (pokemonData) => {
             (filter) => pokemon.id >= filter.start && pokemon.id <= filter.end
           )
         );
-      }
+      } 
 
       if (selectedTypeFilters.length > 0) {
         filteredData = filteredData.filter((pokemon) =>
@@ -76,12 +93,12 @@ const usePokemonFilter = (pokemonData) => {
           );
         });
       }
-
+    }
       setFilteredPokemons(filteredData);
       setIsLoading(false);
     }, 0);
 
-  }, [selectedGenerationFilters, selectedTypeFilters, searchQuery, pokemonData]);
+  }, [ selectedGenerationFilters, selectedTypeFilters, searchQuery, pokemonData, selectedPokemon, showSelectedOnly ]);
 
   const isGenerationFilterSelected = (start, end) => {
     return selectedGenerationFilters.some(
@@ -101,6 +118,8 @@ const usePokemonFilter = (pokemonData) => {
     handleTypeFilter,
     isGenerationFilterSelected,
     isTypeFilterSelected,
+    handleShowSelectedOnly,
+    showSelectedOnly,
   };
 };
 

@@ -1,9 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
-import { Inter } from 'next/font/google'
-
-import styles from '@/styles/Home.module.css'
 import Card from '../components/Card'
 import SearchBar from '../components/Searchbar';
 import React, { useState, useEffect } from 'react';
@@ -12,33 +9,9 @@ import FilterButtons from '@/components/FilterButtons'
 import useBookmark from '@/components/bookmarkhook'
 import usePokemonFilter from '@/components/usePokemonFilter'
 
-// export async function getStaticProps() {
 
-//   const maxPokemons = 1008
 
-//   const api = 'https://pokeapi.co/api/v2/pokemon'
-//   const res = await fetch(`${api}/?limit=${maxPokemons}`)
-
-//   const data = await res.json()
-
-//   data.results.forEach((item, index) => {
-//     const id = index + 1;
-//     if (id < 10) {
-//       item.id = '00' + id;
-//     } else if (id < 100) {
-//       item.id = '0' + id;
-//     } else {
-//       item.id = id.toString();
-//     }
-//   });
-//   return {
-//     props: {
-//       pokemons: data.results,
-//     },
-//   }
-// }
-
-export default function Home({ pokemons }) {
+export default function Home() {
 
 
   // const [pokemontype, setPokemon] = useState([]);
@@ -70,17 +43,17 @@ export default function Home({ pokemons }) {
 
   const { selectedPokemon, handleBookmark } = useBookmark();
 
-
   const {
     filteredPokemons,
     handleSearch,
     handleGenerationFilter,
     handleTypeFilter,
+    handleShowSelectedOnly,
+    showSelectedOnly,
     isGenerationFilterSelected,
     isTypeFilterSelected,
     isLoading,
   } = usePokemonFilter(pokemonData);
-
 
   return (
     <>
@@ -121,7 +94,7 @@ export default function Home({ pokemons }) {
         <div className='sm:flex'>
           <div className='flex flex-col h-fit bg-zinc-900 sm:max-w-fit mt-2 p-4 rounded-xl shadow-inner shadow-black'>
 
-            <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} pokemonData={pokemonData} />
+            <FilterButtons handleGenerationFilter={handleGenerationFilter} isGenerationFilterSelected={isGenerationFilterSelected} handleTypeFilter={handleTypeFilter} isTypeFilterSelected={isTypeFilterSelected} pokemonData={pokemonData} handleShowSelectedOnly={handleShowSelectedOnly} showSelectedOnly={showSelectedOnly} />
 
           </div>
 
@@ -143,7 +116,7 @@ export default function Home({ pokemons }) {
                   key={pokemon.id}
                   pokemon={pokemon}
                   handleBookmark={handleBookmark}
-                  selectedPokemon={selectedPokemon}
+                  isSelectedPokemon={selectedPokemon.some((bookmark) => bookmark.id === pokemon.id)}
                 />
               ))
             )}

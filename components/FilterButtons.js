@@ -2,7 +2,7 @@ import usePokemonFilter from "./usePokemonFilter";
 
 
 
-export default function FilterButtons({ handleGenerationFilter, isGenerationFilterSelected, handleTypeFilter, isTypeFilterSelected, pokemonData }) {
+export default function FilterButtons({ handleGenerationFilter, isGenerationFilterSelected, handleTypeFilter, isTypeFilterSelected, pokemonData, handleShowSelectedOnly, showSelectedOnly }) {
 
     const generationFilters = [
         { start: 0, end: 151, label: 'Kanto' },
@@ -52,6 +52,17 @@ export default function FilterButtons({ handleGenerationFilter, isGenerationFilt
                                 </button>
                             ))}
                     </div>
+                </div>
+
+                <div>
+                    
+                    <button
+                        
+                        onClick={() => handleShowSelectedOnly()}
+                        className={showSelectedOnly ? 'text-zinc-200' : 'hover:text-zinc-400 text-zinc-500'}
+                    >
+                        My PokeDex
+                    </button>
                 </div>
             </div>
 

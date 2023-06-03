@@ -44,6 +44,9 @@ export default function Navbar() {
     // if (isLoading) return <div>Loading...</div>;
     // if (error) return <div>{error.message}</div>;
 
+
+    
+
     return (
         <nav className='flex justify-between items-center p-3 from-red-500 via-[#333] to-black via-30% bg-gradient-to-r border-b border-zinc-400 sticky top-0 z-50'>
             <Link className=" hover:animate-spin" href={'/'}>
@@ -73,17 +76,20 @@ export default function Navbar() {
                                 <h2 className="text-white duration-200 border-b py-1 border-black group hover:border-b-red-500">{user.name}</h2>
                                 {user.email && (<p className="text-white duration-200 border-b py-2 border-black group hover:border-b-red-500">{user.email}</p> )}
 
-                                <a className={`duration-200 border-b py-1 border-black group hover:border-b-red-500 text-zinc-500 hover:text-white`} href="/api/auth/logout">Logout</a>
+                                <a 
+                                onClick={() => localStorage.clear()}
+                                className={`duration-200 border-b py-1 border-black group hover:border-b-red-500 text-zinc-500 hover:text-white`} href="/api/auth/logout">Logout</a>
 
                             </div>
                         </div>
                     
                 </li>
                 )}
+                {isLoading ? (<div className="text-white">Loading...</div>) :
                 <li className="">
                     <a className={`${user ? 'hidden' : ''} duration-200 border-b py-2 border-black hover:border-b-red-500 text-zinc-500 hover:text-white`} href="/api/auth/login">Login</a>
                 </li>
-
+}
             </ul>
         </nav >
     )
